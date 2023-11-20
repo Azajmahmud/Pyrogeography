@@ -101,6 +101,8 @@ View(final_data_for_plotting)
 #######################################################################
 # This part is for filtering the most frequent words in all 
 # the pdf files
+# The source of the following codes 
+# https://www.youtube.com/watch?v=1ODVAOWkajw
 ########################################################################
 
 reading_each_file <- sapply(file_list, pdf_text) # reading all files
