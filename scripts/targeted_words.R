@@ -1,6 +1,11 @@
 # This script is for counting targeted words in all the
 # review papers of "Pyrogeography
 
+
+# To run this script, the working directory need to be set as
+# "./articles". It should be working as "./data/articles"
+# but somewhow it's not working !! No clue, most likely 
+# related to Rstudio version of my laptop!
 #############################################################################
 # Required library
 #############################################################################
@@ -140,7 +145,7 @@ at_least_three_times <- findFreqTerms(most_frequent_word,
 
 
 
-sorted_at_least_three_times <- sort(apply(as.matrix(most_frequent_word[x,]), 1, sum), 
+sorted_at_least_three_times <- sort(apply(as.matrix(most_frequent_word[at_least_three_times,]), 1, sum), 
           decreasing = TRUE)
 
 class(sorted_at_least_three_times)
@@ -149,14 +154,14 @@ View(sorted_at_least_three_times)
 
 most_frequent_words <- as.data.frame(sorted_at_least_three_times)
 
-View(most_frequent_words)
+#View(most_frequent_words)
 
 most_frequent_words <- most_frequent_words %>%
-  rename(frequency = y) %>%
+  rename(frequency = sorted_at_least_three_times) %>%
   filter(frequency >= 1000)
 
-View(most_frequent_words)
+#View(most_frequent_words)
 
-write.csv(most_frequent_words,
-          file = "most_frequent_words.csv",
-          row.names = TRUE)
+#write.csv(most_frequent_words,
+          #file = "./data/most_frequent_words.csv",
+          #row.names = TRUE)
