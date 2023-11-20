@@ -2,6 +2,12 @@
 # Pyrogeography
 # Azaj Mahmud
 
+
+# To run this script, the working directory need to be set as
+# "../data".
+
+source("./scripts/targeted_words.R")
+
 #############################################################################
 # This script is for creating plots
 #############################################################################
@@ -25,7 +31,9 @@ number_of_publication_by_year <- read.csv("./data/number_of_publication_by_year.
 # Number of publications by disciplines
 #############################################################
 
-percentage_of_publications_by_fields_plot <- ggplot(percentage_of_publication_by_field, aes(x = reorder(web_of_science_categories, -record_count), y = record_count, 
+percentage_of_publications_by_fields_plot <- ggplot(percentage_of_publication_by_field, aes(x = reorder(web_of_science_categories,
+                                                                                                        -record_count), 
+                                                                                            y = record_count, 
                  fill = web_of_science_categories)) +
   geom_bar(stat = "identity") +
   labs(x = "Web of Science Categories",
@@ -38,7 +46,7 @@ percentage_of_publications_by_fields_plot <- ggplot(percentage_of_publication_by
 
 
 ggsave("./results/percentage_of_publication_by_fields.pdf",
-       percentage_of_publications_by_fields_plot, height = 220,
+       percentage_of_publications_by_fields_plot, height = 230,
        width = 250, units = "mm", dpi = 300)
 
 ################################################################################################
@@ -59,4 +67,56 @@ ggsave("./results/number_of_publication_by_year_plot.pdf",
        number_of_publication_by_year_plot, height = 220,
        width = 250, units = "mm", dpi = 300)
 
+
+#############################################################
+# Targeted words plots
+#############################################################
+
+targeted_words_plot <- ggplot(final_data_for_plotting,
+                              aes(targeted_words, frequency,
+                                color = targeted_words)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(x = "Targeted words",
+       y = "Mean frequuency",
+       color = "Targeted words") +
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45, 
+                                   face = "bold",
+                                   hjust = 1),
+        axis.text.y = element_text(size = 8,
+                                   face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"))
+
+
+targeted_words_plot
+
+
+ggsave("../results/targeted_words_plot.pdf",
+       plot = targeted_words_plot, height = 200,
+       width = 260, units = "mm", dpi = 300)
+
+
+total_counts_of_targeted_words <- ggplot(final_data_for_plotting,
+                                         aes(x = reorder(targeted_words, - total_counts), 
+                                             y = total_counts,
+                                             fill = targeted_words)) +
+  geom_bar(stat="identity", position="dodge") +
+  theme_bw() +
+  labs(x = "Targeted words",
+       y = "Total counts",
+       fill = "Targeted words") +
+  theme(axis.text.x = element_text(size = 8,
+                                   angle = 45, 
+                                   face = "bold",
+                                   hjust = 1),
+        axis.text.y = element_text(size = 8,
+                                   face = "bold"),
+        axis.title = element_text(size = 12, face = "bold"))
+
+total_counts_of_targeted_words
+
+ggsave("./results/total_counts_of_targeted_words.pdf",
+       plot = total_counts_of_targeted_words, height = 200,
+       width = 260, units = "mm", dpi = 300)
 
