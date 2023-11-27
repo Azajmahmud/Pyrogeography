@@ -2,10 +2,7 @@
 # review papers of "Pyrogeography
 
 
-# To run this script, the working directory need to be set as
-# "./articles". It should be working as "./data/articles"
-# but somewhow it's not working !! No clue, most likely 
-# related to Rstudio version of my laptop!
+# The working directory is set to root directory
 #############################################################################
 # Required library
 #############################################################################
@@ -30,9 +27,9 @@ pyrogeography_word_counts <- function(text, pyrogeography_words) {
 
 # Loading all the articles at once
 
-file_list <- list.files(path = getwd(), 
-                        pattern = "\\.pdf$", 
-                        full.names = FALSE)
+file_list <- list.files(path = "./data/articles", 
+                        pattern = "*.pdf$", 
+                        full.names = TRUE)
 
 
 file_list
@@ -95,7 +92,9 @@ final_data_for_plotting <- reshaped_data_frame %>%
   group_by(targeted_words) %>%
   mutate(total_counts = sum(frequencey))
 
-View(final_data_for_plotting)
+#View(final_data_for_plotting)
+
+
 
 
 #######################################################################
@@ -119,7 +118,7 @@ pdfdatabase <- Corpus(URISource(file_list),
 
 
 
-pdfdatabase
+#pdfdatabase
 
 
 
@@ -138,9 +137,9 @@ inspect(most_frequent_word[1:20, ])
 
 class(most_frequent_word)
 
-View(most_frequent_word)
+#View(most_frequent_word)
 
-most_frequent_word
+#most_frequent_word
 
 at_least_three_times <- findFreqTerms(most_frequent_word,
                    lowfreq = 3, highfreq = Inf)
@@ -152,7 +151,7 @@ sorted_at_least_three_times <- sort(apply(as.matrix(most_frequent_word[at_least_
 
 class(sorted_at_least_three_times)
 
-View(sorted_at_least_three_times)
+#View(sorted_at_least_three_times)
 
 most_frequent_words <- as.data.frame(sorted_at_least_three_times)
 
@@ -164,6 +163,3 @@ most_frequent_words <- most_frequent_words %>%
 
 #View(most_frequent_words)
 
-#write.csv(most_frequent_words,
-          #file = "./data/most_frequent_words.csv",
-          #row.names = TRUE)

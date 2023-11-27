@@ -3,8 +3,6 @@
 # Azaj Mahmud
 
 
-# To run this script, the working directory need to be set as
-# "../data".
 
 source("./scripts/targeted_words.R")
 
@@ -49,6 +47,7 @@ ggsave("./results/percentage_of_publication_by_fields.pdf",
        percentage_of_publications_by_fields_plot, height = 230,
        width = 250, units = "mm", dpi = 300)
 
+
 ################################################################################################
 # Number of publications by year
 ###############################################################################################
@@ -73,7 +72,8 @@ ggsave("./results/number_of_publication_by_year_plot.pdf",
 #############################################################
 
 targeted_words_plot <- ggplot(final_data_for_plotting,
-                              aes(targeted_words, frequency,
+                              aes(x = reorder(targeted_words, -frequencey),
+                                  y = frequencey,
                                 color = targeted_words)) +
   geom_boxplot() +
   theme_bw() +
@@ -92,7 +92,7 @@ targeted_words_plot <- ggplot(final_data_for_plotting,
 targeted_words_plot
 
 
-ggsave("../results/targeted_words_plot.pdf",
+ggsave("./results/targeted_words_plot.pdf",
        plot = targeted_words_plot, height = 200,
        width = 260, units = "mm", dpi = 300)
 
@@ -120,3 +120,15 @@ ggsave("./results/total_counts_of_targeted_words.pdf",
        plot = total_counts_of_targeted_words, height = 200,
        width = 260, units = "mm", dpi = 300)
 
+############################################################
+# Saving the most frequent and targeted words as csv
+############################################################
+
+write.csv(most_frequent_words, 
+          file = "./results/most_frequent_words.csv",
+row.names = TRUE)
+
+write.csv(final_data_for_plotting, 
+file = "./results/targeted_words_for_plotting.csv")
+
+#########################################################################
