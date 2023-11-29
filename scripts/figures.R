@@ -2,6 +2,9 @@
 # Pyrogeography
 # Azaj Mahmud
 
+# This script is for producing figures 
+# and saving the filtered data as csv file!
+
 
 
 source("./scripts/targeted_words.R")

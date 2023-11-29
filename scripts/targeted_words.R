@@ -1,5 +1,5 @@
 # This script is for counting targeted words in all the
-# review papers of "Pyrogeography
+# review papers of "Pyrogeography"
 
 
 # The working directory is set to root directory
@@ -45,7 +45,7 @@ pyrogeography_words <- c("human", "fire", "climate",
                          "pyrogeography",
                          "anthropocene", "pyrodiversity",
                          "pyrome", "spatial",
-                         "temporal")
+                         "temporal", "global")
 
 # Initialize an empty list to store the counts for each file
 file_counts <- list()
