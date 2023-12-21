@@ -72,7 +72,23 @@ ggsave("./results/number_of_publication_by_year_plot.pdf",
 
 #############################################################
 # Targeted words plots
+# Remove those article which didn't have the word fire
 #############################################################
+
+data_for_plotting <- final_data_for_plotting %>%
+  filter(targeted_words == "fire") %>%
+  filter(frequencey !=0)
+
+length(unique(final_data_for_plotting$individual_article)) 
+
+plot_data <- final_data_for_plotting %>%
+  filter(individual_article %in% data_for_plotting$individual_article)
+
+length(unique(data_for_plotting$individual_article))
+
+
+
+
 
 targeted_words_plot <- ggplot(final_data_for_plotting,
                               aes(x = reorder(targeted_words, -frequencey),
