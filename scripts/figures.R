@@ -6,9 +6,6 @@
 # and saving the filtered data as csv file!
 
 
-
-source("./scripts/targeted_words.R")
-
 #############################################################################
 # This script is for creating plots
 #############################################################################
@@ -79,7 +76,7 @@ data_for_plotting <- final_data_for_plotting %>%
   filter(targeted_words == "fire") %>%
   filter(frequencey !=0)
 
-length(unique(final_data_for_plotting$individual_article)) 
+length(unique(data_for_plotting$individual_article)) 
 
 plot_data <- final_data_for_plotting %>%
   filter(individual_article %in% data_for_plotting$individual_article)
@@ -90,7 +87,7 @@ length(unique(data_for_plotting$individual_article))
 
 
 
-targeted_words_plot <- ggplot(final_data_for_plotting,
+targeted_words_plot <- ggplot(plot_data,
                               aes(x = reorder(targeted_words, -frequencey),
                                   y = frequencey,
                                 color = targeted_words)) +
@@ -111,12 +108,12 @@ targeted_words_plot <- ggplot(final_data_for_plotting,
 targeted_words_plot
 
 
-ggsave("./results/targeted_words_plot.pdf",
+ggsave("./results/targeted_words_plot.png",
        plot = targeted_words_plot, height = 200,
        width = 260, units = "mm", dpi = 300)
 
 
-total_counts_of_targeted_words <- ggplot(final_data_for_plotting,
+total_counts_of_targeted_words <- ggplot(plot_data,
                                          aes(x = reorder(targeted_words, - total_counts), 
                                              y = total_counts,
                                              fill = targeted_words)) +
@@ -151,3 +148,4 @@ write.csv(final_data_for_plotting,
 file = "./results/targeted_words_for_plotting.csv")
 
 #########################################################################
+
