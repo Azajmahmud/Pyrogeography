@@ -4,6 +4,7 @@
 # pdf and csv
 .pdf
 .csv
+.png
 # Session Data files
 .RData
 
